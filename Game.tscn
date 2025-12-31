@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhv7eqf2akbs0"]
+
+[ext_resource type="PackedScene" uid="uid://b4b1stiprel48" path="res://GameUI.tscn" id="1_wbfu4"]
+[ext_resource type="PackedScene" uid="uid://dsjlpuaem2qmq" path="res://Player.tscn" id="2_xkndl"]
+[ext_resource type="PackedScene" uid="uid://dyiwenhw7v3ia" path="res://Enemy.tscn" id="3_u44n3"]
+[ext_resource type="PackedScene" uid="uid://c2v4nxn2ed782" path="res://Bullet.tscn" id="4_sb48q"]
+
+[sub_resource type="Gradient" id="Gradient_xkndl"]
+colors = PackedColorArray(0, 0.5824655, 0, 1, 0.43939838, 0.68254733, 0.18054894, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xkndl"]
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u44n3"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_xkndl")
+color_ramp = SubResource("Gradient_xkndl")
+
+[node name="Game" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(530, 321)
+texture = SubResource("NoiseTexture2D_u44n3")
+
+[node name="GameUI" parent="." instance=ExtResource("1_wbfu4")]
+
+[node name="Player" parent="." instance=ExtResource("2_xkndl")]
+position = Vector2(368, 473)
+MoveSpeed = 200.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Enemy" parent="." instance=ExtResource("3_u44n3")]
+position = Vector2(843, -15)
+
+[node name="Bullet" parent="." instance=ExtResource("4_sb48q")]
+position = Vector2(385, 355)
