@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2dn76ri7u10u"]
+
+[ext_resource type="Texture2D" uid="uid://l6aen8jq8mlx" path="res://Soul.png" id="1_fb4yl"]
+[ext_resource type="Script" uid="uid://by21t2r0cip7u" path="res://PickUp.cs" id="1_jloxb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jloxb"]
+radius = 8.514693
+
+[node name="Soul" type="Area2D" node_paths=PackedStringArray("Sprite")]
+scale = Vector2(2, 2)
+script = ExtResource("1_jloxb")
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fb4yl")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jloxb")

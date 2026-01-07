@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2v4nxn2ed782"]
+[gd_scene load_steps=4 format=3 uid="uid://c2v4nxn2ed782"]
 
+[ext_resource type="Script" uid="uid://ccct1ce422u0a" path="res://Projectile.cs" id="1_4s4u5"]
 [ext_resource type="Texture2D" uid="uid://co2t2kg184bkd" path="res://Bullet.png" id="1_ayd6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ayd6b"]
 size = Vector2(18, 10)
 
-[node name="Bullet" type="Node2D"]
+[node name="Bullet" type="Node2D" node_paths=PackedStringArray("Collider")]
 scale = Vector2(2, 2)
+script = ExtResource("1_4s4u5")
+Collider = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="."]
 

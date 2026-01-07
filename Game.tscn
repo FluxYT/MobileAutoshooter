@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhv7eqf2akbs0"]
+[gd_scene load_steps=11 format=3 uid="uid://bhv7eqf2akbs0"]
 
 [ext_resource type="PackedScene" uid="uid://b4b1stiprel48" path="res://GameUI.tscn" id="1_wbfu4"]
 [ext_resource type="PackedScene" uid="uid://dsjlpuaem2qmq" path="res://Player.tscn" id="2_xkndl"]
 [ext_resource type="PackedScene" uid="uid://dyiwenhw7v3ia" path="res://Enemy.tscn" id="3_u44n3"]
-[ext_resource type="PackedScene" uid="uid://c2v4nxn2ed782" path="res://Bullet.tscn" id="4_sb48q"]
+[ext_resource type="PackedScene" uid="uid://c1ltp31k7m3h3" path="res://EnemySpawner.tscn" id="4_sb48q"]
+[ext_resource type="PackedScene" uid="uid://c2dn76ri7u10u" path="res://PickUp.tscn" id="5_t88pq"]
+[ext_resource type="Script" uid="uid://cray101h3rnyn" path="res://DropManager.cs" id="6_r0x5m"]
+[ext_resource type="Script" uid="uid://cigv86s152fwq" path="res://RunManager.cs" id="7_3mrqo"]
 
 [sub_resource type="Gradient" id="Gradient_xkndl"]
 colors = PackedColorArray(0, 0.5824655, 0, 1, 0.43939838, 0.68254733, 0.18054894, 1)
@@ -26,13 +29,21 @@ texture = SubResource("NoiseTexture2D_u44n3")
 [node name="GameUI" parent="." instance=ExtResource("1_wbfu4")]
 
 [node name="Player" parent="." instance=ExtResource("2_xkndl")]
+z_index = 10
 position = Vector2(368, 473)
 MoveSpeed = 200.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="Enemy" parent="." instance=ExtResource("3_u44n3")]
+z_index = 9
 position = Vector2(843, -15)
 
-[node name="Bullet" parent="." instance=ExtResource("4_sb48q")]
-position = Vector2(385, 355)
+[node name="EnemySpawner" parent="." instance=ExtResource("4_sb48q")]
+
+[node name="DropManager" type="Node" parent="."]
+script = ExtResource("6_r0x5m")
+DropPrefab = ExtResource("5_t88pq")
+
+[node name="RunManager" type="Node" parent="."]
+script = ExtResource("7_3mrqo")

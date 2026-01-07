@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsjlpuaem2qmq"]
+[gd_scene load_steps=12 format=3 uid="uid://dsjlpuaem2qmq"]
 
 [ext_resource type="Script" uid="uid://c3q7p08tgdp34" path="res://PlayerController.cs" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://8jyiwaws67gj" path="res://AttackController.cs" id="2_kpjcp"]
+[ext_resource type="PackedScene" uid="uid://c2v4nxn2ed782" path="res://Bullet.tscn" id="3_kne1u"]
+[ext_resource type="Script" uid="uid://bvoy3qihy40gu" path="res://PickUpMagnetiser.cs" id="4_e80uo"]
+[ext_resource type="Script" uid="uid://btc1tjwjqlcn2" path="res://PickUpCollector.cs" id="5_cxr5p"]
 
 [sub_resource type="Gradient" id="Gradient_0rwas"]
 offsets = PackedFloat32Array(0)
@@ -12,6 +16,15 @@ gradient = SubResource("Gradient_0rwas")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpjcp"]
 size = Vector2(65, 63)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhfnw"]
+radius = 300.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kne1u"]
+radius = 100.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdg3f"]
+radius = 30.0
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_xhfnw")
 
@@ -21,3 +34,29 @@ texture = SubResource("GradientTexture2D_xhfnw")
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_kpjcp")
+
+[node name="DetectionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource("CircleShape2D_xhfnw")
+
+[node name="AttackController" type="Node2D" parent="." node_paths=PackedStringArray("DetectionZone", "AttackTimer")]
+script = ExtResource("2_kpjcp")
+DetectionZone = NodePath("../DetectionZone")
+AttackTimer = NodePath("AttackTimer")
+BulletPrefab = ExtResource("3_kne1u")
+
+[node name="AttackTimer" type="Timer" parent="AttackController"]
+autostart = true
+
+[node name="MagnetiserZone" type="Area2D" parent="."]
+script = ExtResource("4_e80uo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetiserZone"]
+shape = SubResource("CircleShape2D_kne1u")
+
+[node name="CollectionZone" type="Area2D" parent="."]
+script = ExtResource("5_cxr5p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionZone"]
+shape = SubResource("CircleShape2D_tdg3f")

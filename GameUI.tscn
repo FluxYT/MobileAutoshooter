@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4b1stiprel48"]
+[gd_scene load_steps=7 format=3 uid="uid://b4b1stiprel48"]
 
 [ext_resource type="Script" uid="uid://c3wenj273awn1" path="res://TestVibrate.cs" id="1_4itvn"]
+[ext_resource type="Script" uid="uid://bs63mmb3e6wbd" path="res://HUDManager.cs" id="1_m61ox"]
 [ext_resource type="Texture2D" uid="uid://j53dadpixrub" path="res://joystick_circle_nub_a.png" id="2_gck35"]
 [ext_resource type="Texture2D" uid="uid://cc2jkyo4yxaa7" path="res://joystick_circle_pad_d.png" id="2_j0ejk"]
 [ext_resource type="Script" uid="uid://djryey3ac5fh5" path="res://VirtualJoystick.cs" id="2_qate7"]
 [ext_resource type="Texture2D" uid="uid://dx670whuj60ex" path="res://joystick_circle_pad_a.png" id="3_m61ox"]
 
-[node name="GameUI" type="CanvasLayer"]
+[node name="GameUI" type="CanvasLayer" node_paths=PackedStringArray("SoulsCounter")]
+script = ExtResource("1_m61ox")
+SoulsCounter = NodePath("SoulsCounter")
 
 [node name="VirtualJoystick" type="Control" parent="."]
 layout_mode = 3
@@ -40,3 +43,10 @@ position = Vector2(984, 490)
 texture_normal = ExtResource("2_j0ejk")
 texture_pressed = ExtResource("2_j0ejk")
 script = ExtResource("1_4itvn")
+
+[node name="SoulsCounter" type="Label" parent="."]
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 68.0
+offset_bottom = 30.0
+text = "Souls: 0"

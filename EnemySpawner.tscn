@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1ltp31k7m3h3"]
+
+[ext_resource type="Script" uid="uid://d8dlbkhbnho5" path="res://EnemySpawner.cs" id="1_skt6m"]
+[ext_resource type="PackedScene" uid="uid://dyiwenhw7v3ia" path="res://Enemy.tscn" id="2_v140b"]
+
+[node name="EnemySpawner" type="Node" node_paths=PackedStringArray("SpawnTimer")]
+script = ExtResource("1_skt6m")
+EnemyPrefab = ExtResource("2_v140b")
+SpawnTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
